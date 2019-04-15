@@ -91,5 +91,6 @@ app.use('/auth', authRoutes);
 app.use('/api', require('./routes/ao-routes'));
 app.use('/api', require('./routes/axe-routes'));
 app.use('/api', require('./routes/candidat-routes'));
+app.use('/api', require('./routes/critere-routes'));
 
 module.exports = app;

@@ -14,6 +14,7 @@ import Navbar from './components/navbar/Navbar';
 import AoDetails from './components/grille/ao/AoDetails';
 import AxeDetails from './components/grille/axes/AxeDetails';
 import CandidatDetails from './components/grille/candidats/CandidatDetails';
+import CritereDetails from './components/grille/criteres/CritereDetails';
 
 class App extends Component {
   constructor(props){
@@ -58,10 +59,10 @@ class App extends Component {
             
             {/* added to display axe details page: */}
             <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId" component={AxeDetails} /> {/* <== !!! */}
-                        {/* added to display axe details page: */}
-            <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId" component={AxeDetails} /> {/* <== !!! */}
+            {/* added to display critere details page: */}
+            <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId/criteres/:critereID" component={CritereDetails} /> {/* <== !!! */}
             
-            {/* added to display axe details page: */}
+            {/* added to display candidat details page: */}
             <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/candidats/:candidatId" component={CandidatDetails} /> {/* <== !!! */}
             
           </Switch>
@@ -83,8 +84,10 @@ class App extends Component {
 
           {/* added to display axe details page: */}
           <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId" component={AxeDetails} /> {/* <== !!! */}
-          
-          {/* added to display axe details page: */}
+          {/* added to display critere details page: */}
+          <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId/criteres/:critereID" component={CritereDetails} /> {/* <== !!! */}
+           
+          {/* added to display candidat details page: */}
           <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/candidats/:candidatId" component={CandidatDetails} /> {/* <== !!! */}
    
         </Switch>
