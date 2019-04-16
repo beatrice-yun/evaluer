@@ -54,7 +54,6 @@ router.get('/ao/:id', (req, res, next)=>{
   //                                   |
   //                                   |
   
-  var result = {}
   Ao.findById(req.params.id)
     .populate("axes")
     .populate("candidats")
@@ -64,18 +63,6 @@ router.get('/ao/:id', (req, res, next)=>{
     .catch(err => {
       res.json(err);
     })
-
-  // Ao.findById(req.params.id)
-  //   .populate('candidats')
-  //   .then(response => {
-  //     result.candidat = response
-  //     console.log(">>>>>>result")
-  //     console.log(result)
-  //     res.status(200).json(result);
-  //   })
-  //   .catch(err => {
-  //     res.json(err);
-  //   })
 });
 
 // PUT route => to update a specific ao

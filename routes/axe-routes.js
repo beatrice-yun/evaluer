@@ -8,16 +8,39 @@ const Critere = require('../models/critere-model');
 
 const router  = express.Router();
 
-// GET route => to retrieve a specific axe
-router.get('/ao/:aoId/axes/:axeId', (req, res, next) => {
+// GET route => to get a specific axe/detailed view
+router.get('/ao/:aoId/axes/:axeId', (req, res, next)=>{
+  if(!mongoose.Types.ObjectId.isValid(req.params.axeId)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
+
+  // our ao have array of axes' ids and 
+  // we can use .populate() method to get the whole axe objects
+  //                                   ^
+  //                                   |
+  //                                   |
+  
   Axe.findById(req.params.axeId)
-  .then(theAxe =>{
-      res.json(theAxe);
-  })
-  .catch( err =>{
+    .populate("criteres")
+    .then(theAxe => {
+      res.status(200).json(theAxe);
+    })
+    .catch(err => {
       res.json(err);
-  })
+    })
 });
+
+// GET route => to retrieve a specific axe
+//router.get('/ao/:aoId/axes/:axeId', (req, res, next) => {
+//  Axe.findById(req.params.axeId)
+//  .then(theAxe =>{
+//      res.json(theAxe);
+//  })
+//  .catch( err =>{
+//      res.json(err);
+//  })
+//});
 
 // POST route => to create a new axe
 router.post('/axes', (req, res, next)=>{
