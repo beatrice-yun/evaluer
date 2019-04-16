@@ -43,7 +43,6 @@ router.get('/ao', (req, res, next) => {
 
 // GET route => to get a specific ao/detailed view
 router.get('/ao/:id', (req, res, next)=>{
-
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
@@ -54,7 +53,11 @@ router.get('/ao/:id', (req, res, next)=>{
   //                                   ^
   //                                   |
   //                                   |
-  Ao.findById(req.params.id).populate('axes')
+  
+  var result = {}
+  Ao.findById(req.params.id)
+    .populate("axes")
+    .populate("candidats")
     .then(response => {
       res.status(200).json(response);
     })
@@ -62,13 +65,17 @@ router.get('/ao/:id', (req, res, next)=>{
       res.json(err);
     })
 
-  Ao.findById(req.params.id).populate('candidats')
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      res.json(err);
-    })
+  // Ao.findById(req.params.id)
+  //   .populate('candidats')
+  //   .then(response => {
+  //     result.candidat = response
+  //     console.log(">>>>>>result")
+  //     console.log(result)
+  //     res.status(200).json(result);
+  //   })
+  //   .catch(err => {
+  //     res.json(err);
+  //   })
 });
 
 // PUT route => to update a specific ao

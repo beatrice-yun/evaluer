@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
-import AddCritere from '../criteres/AddCritere';
 import { Link } from 'react-router-dom';
+import AddCritere from '../criteres/AddCritere';
 
 class AxeDetails extends Component {
   constructor(props){
@@ -12,10 +12,11 @@ class AxeDetails extends Component {
   }
 
   componentDidMount(){
-    this.getTheAxe();
+    this.getSingleAxe();
   }
 
-  getTheAxe = () => {
+
+  getSingleAxe = () => {
     const { params } = this.props.match;
     axios.get(`http://localhost:5000/api/ao/${params.id}/axes/${params.axeId}`)
     .then( responseFromApi =>{

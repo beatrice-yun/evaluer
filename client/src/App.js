@@ -60,7 +60,7 @@ class App extends Component {
             {/* added to display axe details page: */}
             <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId" component={AxeDetails} /> {/* <== !!! */}
             {/* added to display critere details page: */}
-            <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId/criteres/:critereID" component={CritereDetails} /> {/* <== !!! */}
+            <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId/criteres/:critereId" component={CritereDetails} /> {/* <== !!! */}
             
             {/* added to display candidat details page: */}
             <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/candidats/:candidatId" component={CandidatDetails} /> {/* <== !!! */}
@@ -85,7 +85,7 @@ class App extends Component {
           {/* added to display axe details page: */}
           <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId" component={AxeDetails} /> {/* <== !!! */}
           {/* added to display critere details page: */}
-          <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId/criteres/:critereID" component={CritereDetails} /> {/* <== !!! */}
+          <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/axes/:axeId/criteres/:critereId" component={CritereDetails} /> {/* <== !!! */}
            
           {/* added to display candidat details page: */}
           <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/candidats/:candidatId" component={CandidatDetails} /> {/* <== !!! */}
