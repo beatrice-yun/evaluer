@@ -31,7 +31,10 @@ class Navbar extends Component {
           <ul>
             <li>Welcome, {this.state.loggedInUser.username}</li>
             <li>
-              <Link to='/ao' style={{ textDecoration: 'none' }}>Ao</Link>
+              <Link to='/ao' style={{ textDecoration: 'none' }}>Créer une grille d'analyse</Link>
+            </li>
+            <li>
+              <Link to='/analyse' style={{ textDecoration: 'none' }}>Evaluer les offres</Link>
             </li>
             <li>
               <Link to='/'>
