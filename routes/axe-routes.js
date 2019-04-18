@@ -8,6 +8,18 @@ const Critere = require('../models/critere-model');
 
 const router  = express.Router();
 
+// GET route => to get all the axes
+router.get('/axes', (req, res, next) => {
+  Axe.find()
+    .populate('criteres')
+    .then(allTheAxes => {
+      res.json(allTheAxes);
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
+
 // GET route => to get a specific axe/detailed view
 router.get('/ao/:aoId/axes/:axeId', (req, res, next)=>{
   if(!mongoose.Types.ObjectId.isValid(req.params.axeId)) {

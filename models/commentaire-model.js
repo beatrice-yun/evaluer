@@ -12,6 +12,8 @@ const commentaireSchema = new Schema({
     enum: ['positif', 'negatif']
   },
   critere: {type: Schema.Types.ObjectId, ref: 'Critere'},
+  axe: {type: Schema.Types.ObjectId, ref: 'Critere'},
+  ao: {type: Schema.Types.ObjectId, ref:'Candidat'},
   candidat: {type: Schema.Types.ObjectId, ref:'Candidat'}
   // owner will be added later on
 });

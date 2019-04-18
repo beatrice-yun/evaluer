@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import axios from "axios";
 
 class SelectAo extends Component {
     state = {
@@ -7,7 +8,7 @@ class SelectAo extends Component {
     }
    
     componentDidMount() {
-      fetch("http://localhost:5000/api/ao")
+        fetch("http://localhost:5000/api/ao")
         .then((response) => {
           return response.json();
         })
@@ -22,8 +23,9 @@ class SelectAo extends Component {
     render() {
       return (
         <div>
+          <h3>Choisir un appel d'offres</h3>
           <select value={this.state.selectedAo} 
-              onChange={(e) => this.setState({selectedTeam: e.target.value})}>
+            onChange={(e) => this.setState({selectedAo: e.target.value})}> {/*appeler ici la fonction qui prend l'ao sélectionné */}
 
             {this.state.ao.map((oneAo) => { 
             return <option key={oneAo.value} value={oneAo.value}>{oneAo.display}</option>})}

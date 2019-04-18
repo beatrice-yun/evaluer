@@ -7,9 +7,22 @@ const Critere = require('../models/critere-model');
 
 const router  = express.Router();
 
+// GET route => to get all the criteres
+router.get('/criteres', (req, res, next) => {
+  Critere.find()
+    .populate('commentaires')
+    .then(allTheCriteres => {
+      res.json(allTheCriteres);
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
+
 // GET route => to retrieve a specific critere
 router.get('/ao/:aoId/axes/:axeId/criteres/:critereId', (req, res, next) => {
   Critere.findById(req.params.critereId)
+  .populate("commentaires")
   .then(theCritere =>{
       res.json(theCritere);
   })

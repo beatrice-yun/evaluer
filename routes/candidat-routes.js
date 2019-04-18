@@ -7,6 +7,17 @@ const Ao = require('../models/ao-model');
 
 const router  = express.Router();
 
+// GET route => to get all the candidats
+router.get('/candidats', (req, res, next) => {
+  Candidat.find()
+    .then(allTheCandidat => {
+      res.json(allTheCandidat);
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
+
 // GET route => to retrieve a specific candidat
 router.get('/ao/:aoId/candidats/:candidatId', (req, res, next) => {
   Candidat.findById(req.params.candidatId)

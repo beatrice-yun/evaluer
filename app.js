@@ -92,6 +92,7 @@ app.use('/api', require('./routes/ao-routes'));
 app.use('/api', require('./routes/axe-routes'));
 app.use('/api', require('./routes/candidat-routes'));
 app.use('/api', require('./routes/critere-routes'));
+app.use('/api', require('./routes/commentaire-routes'));
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 // 404 => serve React SPA

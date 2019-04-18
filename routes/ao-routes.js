@@ -25,14 +25,9 @@ router.post('/ao', (req, res, next)=>{
 
 // GET route => to get all the ao
 router.get('/ao', (req, res, next) => {
-  Ao.find().populate('axes')
-    .then(allTheAo => {
-      res.json(allTheAo);
-    })
-    .catch(err => {
-      res.json(err);
-    })
-  Ao.find().populate('candidats')
+  Ao.find()
+    .populate('axes')
+    .populate('candidats')
     .then(allTheAo => {
       res.json(allTheAo);
     })
