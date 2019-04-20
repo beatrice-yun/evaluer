@@ -10,7 +10,7 @@ class AddCommentaire extends Component {
         title: "",
         description: "",
         page: "",
-        boolnea: "",
+        boolean: "",
         critere: "",
         candidat: "",
       };
@@ -24,7 +24,7 @@ class AddCommentaire extends Component {
     const boolean = this.state.boolean;
     const critere = this.state.critere;
     const candidat = this.state.candidat;
-    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/commentaire`, { title, description, page, boolean, critere, candidat })
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/commentaires`, { title, description, page, boolean, critere, candidat })
     .then( () => {
         // this.props.getData();
         this.setState({title: "", description: "", page: "", boolean: "", critere: "", candidat: ""});
@@ -43,6 +43,22 @@ class AddCommentaire extends Component {
         <form onSubmit={this.handleFormSubmit}>
           <label>Title:</label>
           <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
+
+          <label>Description:</label>
+          <input type="text" name="description" value={this.state.description} onChange={ e => this.handleChange(e)}/>
+
+          <label>Page:</label>
+          <input type="text" name="page" value={this.state.page} onChange={ e => this.handleChange(e)}/>
+
+          <label>Boolean:</label>
+          <select value={this.state.bolean} name="boolean"
+            onChange={e => this.handleChange(e)}>
+            <option>Choisir une option</option>
+            <option value="positif">Positif</option>
+            <option value="negatif">Negatif</option>
+          </select>
+
+          <input type="text" name="boolean" value={this.state.boolean} onChange={ e => this.handleChange(e)}/>
           
           <input type="submit" value="Submit" />
         </form>

@@ -1,9 +1,12 @@
 import React from "react";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 class Analyse extends Component {
-  state = {
+  constructor(props) {
+  super(props);
+  this.state = {
     ao: [],
     selectedAo: {},
     axes: [],
@@ -13,8 +16,15 @@ class Analyse extends Component {
     candidats: [],
     selectedCandidat: {},
     commentaires: [],
-    selectedCommentaire: {}
+    selectedCommentaire: {},
+    title: "",
+    description: "",
+    page: "",
+    boolean: "",
+    critere: "",
+    candidat: ""
   }
+}
 
   componentDidMount () {
     
@@ -75,6 +85,29 @@ class Analyse extends Component {
 
   }
 
+  // formulaire AddCommentaire
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    const title = this.state.title;
+    const description = this.state.description;
+    const page = this.state.page;
+    const boolean = this.state.boolean;
+    const critere = this.state.critere;
+    const candidat = this.state.candidat;
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/commentaires`, { title, description, page, boolean, critere, candidat })
+    .then( () => {
+        // this.props.getData();
+        this.setState({title: "", description: "", page: "", boolean: "", critere: "", candidat: ""});
+    })
+    .catch( error => console.log(error) )
+  }
+
+  // formulaire AddCommentaire
+  handleChange = (event) => {  
+      const {name, value} = event.target;
+      this.setState({[name]: value});
+  }
+
   render () {
     return (
       <div>
@@ -82,8 +115,8 @@ class Analyse extends Component {
         <div>
           <h3>Choisir un appel d'offres</h3>
           <select value={this.state.selectedAo.value} 
-            onChange={(e) => this.setState({selectedAo: e.target.value})}> {/*appeler ici la fonction qui prend l'ao sélectionné */}
-
+            onChange={(e) => this.setState({selectedAo: e.target.value})}>
+            <option>Choisir un appel d'offres</option>
             {this.state.ao.map((oneAo) => { 
             return <option key={oneAo.value} value={oneAo.value}>{oneAo.display}</option>})}
 
@@ -94,7 +127,7 @@ class Analyse extends Component {
         <h3>Choisir un axe</h3>
           <select value={this.state.selectedAxes} 
             onChange={(e) => this.setState({selectedAxes: e.target.value})}>
-
+            <option>Choisir un axe</option>
             {this.state.axes.filter( axe => axe.ao === this.state.selectedAo)
             .map((oneAxe) => { 
             return <option key={oneAxe.value} value={oneAxe.value}>{oneAxe.display}</option>})}
@@ -105,7 +138,7 @@ class Analyse extends Component {
           <h3>Choisir un critère</h3>
           <select value={this.state.selectedCritere} 
             onChange={(e) => this.setState({selectedCritere: e.target.value})}>
-            
+            <option>Choisir un critère</option>
             {this.state.criteres.filter( critere => critere.axe === this.state.selectedAxes)
             .map((oneCritere) => { 
             return <option key={oneCritere.value} value={oneCritere.value}>{oneCritere.display}</option>})}
@@ -116,7 +149,7 @@ class Analyse extends Component {
           <h3>Choisir un candidat</h3>
           <select value={this.state.selectedCandidat} 
             onChange={(e) => this.setState({selectedCandidat: e.target.value})}> {/*appeler ici la fonction qui prend l'ao sélectionné */}
-
+            <option>Choisir un candidat</option>
             {this.state.candidats.filter( candidat => candidat.ao === this.state.selectedAo)
             .map((oneCandidat) => { 
             return <option key={oneCandidat.value} value={oneCandidat.value}>{oneCandidat.display}</option>})}
@@ -130,9 +163,8 @@ class Analyse extends Component {
         </div>
 
         <div>
-          { this.state.commentaires
-          &&
-          this.state.commentaires.filter( commentaire => commentaire.critere === this.state.selectedCritere && commentaire.candidat === this.state.selectedCandidat)
+          <h3>Liste des commentaires</h3>
+          {this.state.commentaires.filter( commentaire => commentaire.critere === this.state.selectedCritere && commentaire.candidat === this.state.selectedCandidat)
           .map((oneCommentaire) => {
               return(
                   <div key={ oneCommentaire.value } value={oneCommentaire.value}>
@@ -141,14 +173,38 @@ class Analyse extends Component {
                           { oneCommentaire.display }
                       </Link>
                       </div>
-              )
-              
+              )    
           }) }
         </div>
         
         <div>
-          <h3>Ajouter un commentaire</h3>
-        </div>
+        <form onSubmit={this.handleFormSubmit}>
+          <label>Title:</label>
+          <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
+
+          <label>Description:</label>
+          <input type="text" name="description" value={this.state.description} onChange={ e => this.handleChange(e)}/>
+
+          <label>Page:</label>
+          <input type="text" name="page" value={this.state.page} onChange={ e => this.handleChange(e)}/>
+
+          <label>Boolean:</label>
+          <select value={this.state.bolean} name="boolean"
+            onChange={e => this.handleChange(e)}>
+            <option>Choisir une option</option>
+            <option value="positif">Positif</option>
+            <option value="negatif">Negatif</option>
+          </select>
+
+          <input type="text" name="boolean" value={this.state.boolean} onChange={ e => this.handleChange(e)}/>
+
+          <input name="critere" value={this.state.selectedCritere} onChange={ e => this.handleChange(e)}/>
+
+          <input name="candidat" value={this.state.selectedCandidat} onChange={ e => this.handleChange(e)}/>
+          
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
 
         {/* Edit commentaire */}
 
