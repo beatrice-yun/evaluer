@@ -17,12 +17,14 @@ class Analyse extends Component {
     selectedCandidat: {},
     commentaires: [],
     selectedCommentaire: {},
+    analyses: [],
     title: "",
     description: "",
     page: "",
     boolean: "",
-    critere: "",
-    candidat: ""
+    critere: {},
+    candidat: {},
+    note: "",
   }
 }
 
@@ -83,26 +85,46 @@ class Analyse extends Component {
       console.log(error);
     });
 
+    fetch(`${process.env.REACT_APP_APIURL || ""}/api/analyses`)
+    .then((response) => {
+      return response.json();
+    })
+    .then(data => {
+      let analyseFromAPI = data.map(oneAnalyse => { return {value: oneAnalyse._id, display: oneAnalyse.note, critere: oneAnalyse.critere, candidat: oneAnalyse.candidat} })
+      this.setState({ oneAnalyse: [{value: '', display: '', critere: '', candidat:''}].concat(analyseFromAPI) });
+    }).catch(error => {
+      console.log(error);
+    });
+
   }
 
-  // formulaire AddCommentaire
+  // formulaire
   handleFormSubmit = (event) => {
     event.preventDefault();
     const title = this.state.title;
     const description = this.state.description;
     const page = this.state.page;
     const boolean = this.state.boolean;
-    const critere = this.state.critere;
-    const candidat = this.state.candidat;
+    const critere = this.state.selectedCritere;
+    const candidat = this.state.selectedCandidat;
+    const note = this.state.note;
+    
     axios.post(`${process.env.REACT_APP_APIURL || ""}/api/commentaires`, { title, description, page, boolean, critere, candidat })
     .then( () => {
         // this.props.getData();
         this.setState({title: "", description: "", page: "", boolean: "", critere: "", candidat: ""});
     })
     .catch( error => console.log(error) )
+
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/analyses`, { note, critere, candidat })
+    .then( () => {
+        // this.props.getData();
+        this.setState({note: "", critere: "", candidat: ""});
+    })
+    .catch( error => console.log(error) )
   }
 
-  // formulaire AddCommentaire
+  // Pour envoi serveur
   handleChange = (event) => {  
       const {name, value} = event.target;
       this.setState({[name]: value});
@@ -158,8 +180,24 @@ class Analyse extends Component {
         </div>
         
         <div>
-          <h3>Note :</h3>
-          
+        <h3>Note</h3>
+          {this.state.analyses.filter( analyse => analyse.critere2 === this.state.selectedCritere && analyse.candidat2 === this.state.selectedCandidat)
+          .map((oneAnalyse) => {
+              return(
+                  <div key={ oneAnalyse.value } value={oneAnalyse.value}>
+                  {/* ... make each axe's title a link that goes to the axes details page */}
+                    <p>
+                      { oneAnalyse.display }
+                    </p>
+                  </div>
+              )    
+          }) }
+          <form onSubmit={this.handleFormSubmit}>              
+              <input type="text" name="note" value={this.state.note} onChange={ e => this.handleChange(e)}/>
+              <input name="critere" value={this.state.selectedCritere} onChange={ e => this.handleChange(e)}/>
+              <input name="candidat" value={this.state.selectedCandidat} onChange={ e => this.handleChange(e)}/>
+              <input type="submit" value="Submit" />
+          </form> 
         </div>
 
         <div>
