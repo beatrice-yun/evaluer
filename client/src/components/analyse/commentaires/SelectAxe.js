@@ -4,7 +4,7 @@ import React, { Component } from "react";
 class SelectAxe extends Component {
     state = {
       axes: [],
-      selectedAxe: ""
+      selectedAxes: ""
     }
    
     componentDidMount() {
@@ -25,10 +25,11 @@ class SelectAxe extends Component {
       return (
         <div>
           <h3>Choisir un axe</h3>
-          <select value={this.state.selectedAxe} 
-            onChange={(e) => this.setState({selectedAxe: e.target.value})}> {/*appeler ici la fonction qui prend l'ao sélectionné */}
+          <select value={this.state.selectedAxes} 
+            onChange={(e) => this.setState({selectedAxes: e.target.value})}> {/*appeler ici la fonction qui prend l'ao sélectionné */}
 
             {this.state.axes.filter(axe => {
+              {/* ici mettre la fonction de axe.ao === ao._id */}
               return false;
             }).map((oneAxe) => { 
             return <option key={oneAxe.value} value={oneAxe.value}>{oneAxe.display}</option>})}

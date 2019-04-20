@@ -10,6 +10,17 @@ const Commentaire = require('../models/commentaire-model');
 
 const router  = express.Router();
 
+// GET route to get all the commentaires
+router.get('/commentaires', (req, res, next) => {
+  Commentaire.find()
+    .then(allTheCommentaire => {
+      res.json(allTheCommentaire);
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
+
 // GET route => to get a specific commentaire/detailed view
 router.get('/commentaires/:commentaireId', (req, res, next)=>{
   if(!mongoose.Types.ObjectId.isValid(req.params.commentaireId)) {
@@ -34,7 +45,7 @@ router.post('/commentaires', (req, res, next)=>{
       description: req.body.description,
       page: req.body.page,
       boolean: req.body.boolean,
-      Critere: req.body.critereID,
+      critere: req.body.critereID,
       axe: req.body.axeID,
       ao: req.body.aoID,
       candidat: req.body.candidatID

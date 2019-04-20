@@ -4,20 +4,20 @@ import React, { Component } from "react";
 class SelectAo extends Component {
     state = {
       ao: [],
-      selectedAo: ""
+      selectedAo: "",
     }
    
     componentDidMount() {
-        fetch("http://localhost:5000/api/ao")
-        .then((response) => {
-          return response.json();
-        })
-        .then(data => {
-          let aoFromAPI = data.map(oneAo => { return {value: oneAo._id, display: oneAo.title} })
-          this.setState({ ao: [{value: '', display: ''}].concat(aoFromAPI) });
-        }).catch(error => {
-          console.log(error);
-        });
+      fetch("http://localhost:5000/api/ao")
+      .then((response) => {
+        return response.json();
+      })
+      .then(data => {
+        let aoFromAPI = data.map(oneAo => { return {value: oneAo._id, display: oneAo.title} })
+        this.setState({ ao: [{value: '', display: ''}].concat(aoFromAPI) });
+      }).catch(error => {
+        console.log(error);
+      });
     }
    
     render() {
