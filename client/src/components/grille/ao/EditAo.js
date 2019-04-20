@@ -17,7 +17,7 @@ class EditAo extends Component {
 
     event.preventDefault();
 
-    axios.put(`http://localhost:5000/api/ao/${this.props.theAo._id}`, { title })
+    axios.put(`${process.env.REACT_APP_APIURL || ""}/api/ao/${this.props.theAo._id}`, { title })
     .then( () => {
         this.props.getThePAo();
         // after submitting the form, redirect to '/ao'

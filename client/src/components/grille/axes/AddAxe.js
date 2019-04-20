@@ -20,7 +20,7 @@ class AddAxe extends Component {
     
     // { title, description, aoID } => this is 'req.body' that will be received on the server side in this route, 
     // so the names have to match
-    axios.post("http://localhost:5000/api/axes", { title, description, aoID })
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/axes`, { title, description, aoID })
     .then( () => {
           // after submitting the form, retrieve ao one more time so the new axe is displayed as well 
           //              |

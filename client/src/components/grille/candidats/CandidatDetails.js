@@ -16,7 +16,7 @@ class CandidatDetails extends Component {
 
   getTheCandidat = () => {
     const { params } = this.props.match;
-    axios.get(`http://localhost:5000/api/ao/${params.id}/candidats/${params.candidatId}`)
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/ao/${params.id}/candidats/${params.candidatId}`)
     .then( responseFromApi =>{
       const theCandidat = responseFromApi.data;
       this.setState(theCandidat);

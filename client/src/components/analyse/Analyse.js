@@ -18,7 +18,7 @@ class Analyse extends Component {
 
   componentDidMount () {
     
-    fetch("http://localhost:5000/api/ao")
+    fetch(`${process.env.REACT_APP_APIURL || ""}/api/ao`)
     .then((response) => {
       return response.json();
     })
@@ -29,7 +29,7 @@ class Analyse extends Component {
       console.log(error);
     });
 
-    fetch("http://localhost:5000/api/axes")
+    fetch(`${process.env.REACT_APP_APIURL || ""}/api/axes`)
     .then((response) => {
       return response.json();
     })
@@ -40,7 +40,7 @@ class Analyse extends Component {
       console.log(error);
     });
 
-    fetch("http://localhost:5000/api/criteres")
+    fetch(`${process.env.REACT_APP_APIURL || ""}/api/criteres`)
     .then((response) => {
       return response.json();
     })
@@ -51,7 +51,7 @@ class Analyse extends Component {
       console.log(error);
     });
 
-    fetch("http://localhost:5000/api/candidats")
+    fetch(`${process.env.REACT_APP_APIURL || ""}/api/candidats`)
     .then((response) => {
       return response.json();
     })
@@ -62,7 +62,7 @@ class Analyse extends Component {
       console.log(error);
     });
 
-    fetch("http://localhost:5000/api/commentaires")
+    fetch(`${process.env.REACT_APP_APIURL || ""}/api/commentaires`)
     .then((response) => {
       return response.json();
     })
@@ -145,8 +145,13 @@ class Analyse extends Component {
               
           }) }
         </div>
+        
+        <div>
+          <h3>Ajouter un commentaire</h3>
+        </div>
+
         {/* Edit commentaire */}
-        {/* Add commentaire */}
+
       </div>
     )
   }

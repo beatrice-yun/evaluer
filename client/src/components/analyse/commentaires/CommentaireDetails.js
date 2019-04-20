@@ -13,7 +13,7 @@ class CommentairreDetails extends Component {
 
   getSingleCommentaire = () => {
       const { params } = this.props.match;
-      axios.get(`http://localhost:5000/api/commentaires/${params.id}`)
+      axios.get(`${process.env.REACT_APP_APIURL || ""}/api/commentaires/${params.id}`)
       .then( responseFromApi =>{
           const theCommentaire = responseFromApi.data;
           this.setState(theCommentaire);

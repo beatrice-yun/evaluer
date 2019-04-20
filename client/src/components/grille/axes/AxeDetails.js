@@ -18,7 +18,7 @@ class AxeDetails extends Component {
 
   getSingleAxe = () => {
     const { params } = this.props.match;
-    axios.get(`http://localhost:5000/api/ao/${params.id}/axes/${params.axeId}`)
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/ao/${params.id}/axes/${params.axeId}`)
     .then( responseFromApi =>{
       const theAxe = responseFromApi.data;
       this.setState(theAxe);

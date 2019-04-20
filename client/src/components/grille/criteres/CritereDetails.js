@@ -15,7 +15,7 @@ class CritereDetails extends Component {
 
   getTheCritere = () => {
     const { params } = this.props.match;
-    axios.get(`http://localhost:5000/api/ao/${params.id}/axes/${params.axeId}/criteres/${params.critereId}`)
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/ao/${params.id}/axes/${params.axeId}/criteres/${params.critereId}`)
     .then( responseFromApi =>{
       const theCritere = responseFromApi.data;
       this.setState(theCritere);

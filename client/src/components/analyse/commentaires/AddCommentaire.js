@@ -19,10 +19,15 @@ class AddCommentaire extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     const title = this.state.title;
-    axios.post("http://localhost:5000/api/commentaire", { title })
+    const description = this.state.description;
+    const page = this.state.page;
+    const boolean = this.state.boolean;
+    const critere = this.state.critere;
+    const candidat = this.state.candidat;
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/commentaire`, { title, description, page, boolean, critere, candidat })
     .then( () => {
         // this.props.getData();
-        this.setState({title: ""});
+        this.setState({title: "", description: "", page: "", boolean: "", critere: "", candidat: ""});
     })
     .catch( error => console.log(error) )
   }

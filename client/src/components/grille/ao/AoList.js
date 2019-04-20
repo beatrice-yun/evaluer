@@ -12,7 +12,7 @@ class AoList extends Component {
   }
 
   getAllAo= () =>{
-    axios.get(`http://localhost:5000/api/ao`)
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/ao`)
     .then(responseFromApi => {
       this.setState({
         listOfAo: responseFromApi.data

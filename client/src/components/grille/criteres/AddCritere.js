@@ -19,7 +19,7 @@ class AddCritere extends Component {
     
     // { title, axeID } => this is 'req.body' that will be received on the server side in this route, 
     // so the names have to match
-    axios.post("http://localhost:5000/api/criteres", { title, axeID })
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/criteres`, { title, axeID })
     .then( () => {
           // after submitting the form, retrieve axe one more time so the new critere is displayed as well 
           //              |

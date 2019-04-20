@@ -19,7 +19,7 @@ class AoDetails extends Component {
 
   getSingleAo = () => {
       const { params } = this.props.match;
-      axios.get(`http://localhost:5000/api/ao/${params.id}`)
+      axios.get(`${process.env.REACT_APP_APIURL || ""}/api/ao/${params.id}`)
       .then( responseFromApi =>{
           const theAo = responseFromApi.data;
           this.setState(theAo);
@@ -45,7 +45,7 @@ class AoDetails extends Component {
   // DELETE AO :
   deleteAo = () => {
     const { params } = this.props.match;
-    axios.delete(`http://localhost:5000/api/ao/${params.id}`)
+    axios.delete(`${process.env.REACT_APP_APIURL || ""}/api/ao/${params.id}`)
     .then( () =>{
         this.props.history.push('/ao'); // !!!         
     })
