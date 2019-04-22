@@ -1,19 +1,13 @@
-// components/ao/AddAo.js => à modifier pour commentaire
+// components/commentaires/AddCommentaire.js
 
 import React, { Component } from 'react';
 import axios from 'axios';
 
 class AddCommentaire extends Component {
   constructor(props){
-      super(props);
-      this.state = { 
-        title: "",
-        description: "",
-        page: "",
-        boolean: "",
-        critere: "",
-        candidat: "",
-      };
+      super(props);          //             will help us to toggle add task form   
+                            //                      |
+      this.state = { description: "", page: "", boolean:"", isShowing: false };
   }
    
   handleFormSubmit = (event) => {
@@ -22,12 +16,18 @@ class AddCommentaire extends Component {
     const description = this.state.description;
     const page = this.state.page;
     const boolean = this.state.boolean;
-    const critere = this.state.critere;
-    const candidat = this.state.candidat;
-    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/commentaires`, { title, description, page, boolean, critere, candidat })
+    const noteID = this.props.theNote._id; // <== we need to know to which ao the created axe belong, so we need to get its 'id'
+                                                // it has to be the 'id' because we are referencing ao 
+                                                // by its id in the axe model on the server side ( ao: {type: Schema.Types.ObjectId, ref: 'Ao'})
+    
+    // { title, description, aoID } => this is 'req.body' that will be received on the server side in this route, 
+    // so the names have to match
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/commentaires`, { title, description, page, boolean, noteID })
     .then( () => {
-        // this.props.getData();
-        this.setState({title: "", description: "", page: "", boolean: "", critere: "", candidat: ""});
+          // after submitting the form, retrieve note one more time so the new commentaire is displayed as well 
+          //              |
+        this.props.getTheNote();
+        this.setState({title:"", description: "", page: "", boolean:""});
     })
     .catch( error => console.log(error) )
   }
@@ -37,31 +37,40 @@ class AddCommentaire extends Component {
       this.setState({[name]: value});
   }
 
+  toggleForm = () => {
+      if(!this.state.isShowing){
+          this.setState({isShowing: true});
+      } else {
+        this.setState({isShowing: false});
+      }
+  }
+
+  showAddCommentaireForm = () => {
+    if(this.state.isShowing){
+        return(
+            <div>
+                  <h3>Add commentaire</h3>
+                  <form onSubmit={this.handleFormSubmit}>
+                  <label>Description:</label>
+                  <input type="text" name="description" value={this.state.description} onChange={ e => this.handleChange(e)}/>
+                  <label>Page:</label>
+                  <textarea name="page" value={this.state.page} onChange={ e => this.handleChange(e)} />
+                  <label>Boolean:</label>
+                  <textarea name="boolean" value={this.state.boolean} onChange={ e => this.handleChange(e)} />
+                  
+                  <input type="submit" value="Submit" />
+                  </form>
+            </div>
+          )
+    }
+  }
+
   render(){
     return(
       <div>
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Title:</label>
-          <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
-
-          <label>Description:</label>
-          <input type="text" name="description" value={this.state.description} onChange={ e => this.handleChange(e)}/>
-
-          <label>Page:</label>
-          <input type="text" name="page" value={this.state.page} onChange={ e => this.handleChange(e)}/>
-
-          <label>Boolean:</label>
-          <select value={this.state.bolean} name="boolean"
-            onChange={e => this.handleChange(e)}>
-            <option>Choisir une option</option>
-            <option value="positif">Positif</option>
-            <option value="negatif">Negatif</option>
-          </select>
-
-          <input type="text" name="boolean" value={this.state.boolean} onChange={ e => this.handleChange(e)}/>
-          
-          <input type="submit" value="Submit" />
-        </form>
+            <hr />
+            <button onClick={() => this.toggleForm()}> Add commentaire </button>
+            { this.showAddCommentaireForm() }
       </div>
     )
   }

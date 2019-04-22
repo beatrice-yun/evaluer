@@ -4,17 +4,14 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const commentaireSchema = new Schema({
-  title: String,
+  title: String, 
   description: String,
   page: Number,
   boolean: {
     type: String,
     enum: ['positif', 'negatif']
   },
-  critere: {type: Schema.Types.ObjectId, ref: 'Critere'},
-  axe: {type: Schema.Types.ObjectId, ref: 'Critere'},
-  ao: {type: Schema.Types.ObjectId, ref:'Candidat'},
-  candidat: {type: Schema.Types.ObjectId, ref:'Candidat'}
+  note: {type: Schema.Types.ObjectId, ref: 'Note'}
   // owner will be added later on
 });
 

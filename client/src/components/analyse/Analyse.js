@@ -15,15 +15,18 @@ class Analyse extends Component {
     selectedCritere: {},
     candidats: [],
     selectedCandidat: {},
+    notes: [],
+    /*
     commentaires: [],
     selectedCommentaire: {},
+    */
     analyses: [],
     title: "",
     description: "",
     page: "",
     boolean: "",
-    critere: {},
-    candidat: {},
+    critere: "",
+    candidat: "",
     note: "",
   }
 }
@@ -74,6 +77,18 @@ class Analyse extends Component {
       console.log(error);
     });
 
+    fetch(`${process.env.REACT_APP_APIURL || ""}/api/notes`)
+    .then((response) => {
+      return response.json();
+    })
+    .then(data => {
+      let noteFromAPI = data.map(oneNote => { return {value: oneNote._id, display: oneNote.note, critere: oneNote.critere, candidat: oneNote.candidat} })
+      this.setState({ notes: [{value: '', display: '', critere: '', candidat:''}].concat(noteFromAPI) });
+    }).catch(error => {
+      console.log(error);
+    });
+
+    /*
     fetch(`${process.env.REACT_APP_APIURL || ""}/api/commentaires`)
     .then((response) => {
       return response.json();
@@ -84,44 +99,40 @@ class Analyse extends Component {
     }).catch(error => {
       console.log(error);
     });
-
-    fetch(`${process.env.REACT_APP_APIURL || ""}/api/analyses`)
-    .then((response) => {
-      return response.json();
-    })
-    .then(data => {
-      let analyseFromAPI = data.map(oneAnalyse => { return {value: oneAnalyse._id, display: oneAnalyse.note, critere: oneAnalyse.critere, candidat: oneAnalyse.candidat} })
-      this.setState({ oneAnalyse: [{value: '', display: '', critere: '', candidat:''}].concat(analyseFromAPI) });
-    }).catch(error => {
-      console.log(error);
-    });
+    */
 
   }
 
   // formulaire
   handleFormSubmit = (event) => {
     event.preventDefault();
+    /*
     const title = this.state.title;
     const description = this.state.description;
     const page = this.state.page;
     const boolean = this.state.boolean;
+    */
     const critere = this.state.selectedCritere;
     const candidat = this.state.selectedCandidat;
     const note = this.state.note;
+    const title = this.state.title;
     
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/notes`, { title, note, critere, candidat })
+    .then( () => {
+        // this.props.getData();
+        this.setState({title:"", note: "", critere: "", candidat: ""});
+    })
+    .catch( error => console.log(error) )
+  
+    /*
     axios.post(`${process.env.REACT_APP_APIURL || ""}/api/commentaires`, { title, description, page, boolean, critere, candidat })
     .then( () => {
         // this.props.getData();
         this.setState({title: "", description: "", page: "", boolean: "", critere: "", candidat: ""});
     })
     .catch( error => console.log(error) )
+    */
 
-    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/analyses`, { note, critere, candidat })
-    .then( () => {
-        // this.props.getData();
-        this.setState({note: "", critere: "", candidat: ""});
-    })
-    .catch( error => console.log(error) )
   }
 
   // Pour envoi serveur
@@ -181,32 +192,46 @@ class Analyse extends Component {
         
         <div>
         <h3>Note</h3>
-          {this.state.analyses.filter( analyse => analyse.critere2 === this.state.selectedCritere && analyse.candidat2 === this.state.selectedCandidat)
-          .map((oneAnalyse) => {
+        {this.state.notes.filter( note => note.critere === this.state.selectedCritere && note.candidat === this.state.selectedCandidat)
+          .map((oneNote) => {
               return(
-                  <div key={ oneAnalyse.value } value={oneAnalyse.value}>
+                  <div key={ oneNote.value } value={oneNote.value}>
                   {/* ... make each axe's title a link that goes to the axes details page */}
-                    <p>
-                      { oneAnalyse.display }
-                    </p>
-                  </div>
+                      <Link to={`/notes/${oneNote.value}`}> 
+                          { oneNote.display }
+                      </Link>
+                      </div>
               )    
           }) }
-          <form onSubmit={this.handleFormSubmit}>              
+          
+          <form onSubmit={this.handleFormSubmit}>            
+              <label>Note:</label>
               <input type="text" name="note" value={this.state.note} onChange={ e => this.handleChange(e)}/>
-              <input name="critere" value={this.state.selectedCritere} onChange={ e => this.handleChange(e)}/>
-              <input name="candidat" value={this.state.selectedCandidat} onChange={ e => this.handleChange(e)}/>
+              {/*
+              <select name="note" value={this.state.note} onChange={ e => this.handleChange(e)}>
+                <option value="NA">NA</option>
+                <option value="++">++</option>
+                <option value="+">+</option>
+                <option value="+">=</option>
+                <option value="+">-</option>
+                <option value="+">--</option>
+              </select>
+              */}
+
+              <input name="critere" value={this.state.selectedCritere} 
+            onChange={(e) => this.setState({critere: e.target.value})}/>
+              <input name="candidat" value={this.state.selectedCandidat} 
+            onChange={(e) => this.setState({candidat: e.target.value})}/>
               <input type="submit" value="Submit" />
           </form> 
         </div>
-
+        {/*
         <div>
           <h3>Liste des commentaires</h3>
           {this.state.commentaires.filter( commentaire => commentaire.critere === this.state.selectedCritere && commentaire.candidat === this.state.selectedCandidat)
           .map((oneCommentaire) => {
               return(
                   <div key={ oneCommentaire.value } value={oneCommentaire.value}>
-                  {/* ... make each axe's title a link that goes to the axes details page */}
                       <Link to={`/commentaires/${oneCommentaire.value}`}> 
                           { oneCommentaire.display }
                       </Link>
@@ -214,7 +239,9 @@ class Analyse extends Component {
               )    
           }) }
         </div>
+        */}
         
+        {/*
         <div>
         <form onSubmit={this.handleFormSubmit}>
           <label>Title:</label>
@@ -243,6 +270,7 @@ class Analyse extends Component {
           <input type="submit" value="Submit" />
         </form>
       </div>
+        */}
 
         {/* Edit commentaire */}
 

@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const analyseSchema = new Schema({
-  note: Number,
-  critere: {type: Schema.Types.ObjectId, ref: 'CritereA'},
-  candidat: {type: Schema.Types.ObjectId, ref:'CandidatA'}
+  auteur: String,
+  ao: {type: Schema.Types.ObjectId, ref: 'Ao'},
+  notes: [{type: Schema.Types.ObjectId, ref:'Note'}]
   // owner will be added later on
 });
 

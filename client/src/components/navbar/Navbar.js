@@ -34,7 +34,7 @@ class Navbar extends Component {
               <Link to='/ao' style={{ textDecoration: 'none' }}>Créer une grille d'analyse</Link>
             </li>
             <li>
-              <Link to='/analyse' style={{ textDecoration: 'none' }}>Evaluer les offres</Link>
+              <Link to='/analyses' style={{ textDecoration: 'none' }}>Evaluer les offres</Link>
             </li>
             <li>
               <Link to='/'>

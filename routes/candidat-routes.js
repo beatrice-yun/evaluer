@@ -7,17 +7,6 @@ const Ao = require('../models/ao-model');
 
 const router  = express.Router();
 
-// GET route => to get all the candidats
-router.get('/candidats', (req, res, next) => {
-  Candidat.find()
-    .then(allTheCandidat => {
-      res.json(allTheCandidat);
-    })
-    .catch(err => {
-      res.json(err);
-    })
-});
-
 // GET route => to retrieve a specific candidat
 router.get('/ao/:aoId/candidats/:candidatId', (req, res, next) => {
   Candidat.findById(req.params.candidatId)
@@ -27,6 +16,17 @@ router.get('/ao/:aoId/candidats/:candidatId', (req, res, next) => {
   .catch( err =>{
       res.json(err);
   })
+});
+
+// GET route => to get all the candidats
+router.get('/candidats', (req, res, next) => {
+  Candidat.find()
+    .then(allTheCandidats => {
+      res.json(allTheCandidats);
+    })
+    .catch(err => {
+      res.json(err);
+    })
 });
 
 // POST route => to create a new candidat

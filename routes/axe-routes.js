@@ -4,21 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Axe = require('../models/axe-model');
 const Ao = require('../models/ao-model');
-const Critere = require('../models/critere-model');
 
 const router  = express.Router();
-
-// GET route => to get all the axes
-router.get('/axes', (req, res, next) => {
-  Axe.find()
-    .populate('criteres')
-    .then(allTheAxes => {
-      res.json(allTheAxes);
-    })
-    .catch(err => {
-      res.json(err);
-    })
-});
 
 // GET route => to get a specific axe/detailed view
 router.get('/ao/:aoId/axes/:axeId', (req, res, next)=>{
@@ -37,6 +24,18 @@ router.get('/ao/:aoId/axes/:axeId', (req, res, next)=>{
     .populate("criteres")
     .then(theAxe => {
       res.status(200).json(theAxe);
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
+
+// GET route => to get all the axes
+router.get('/axes', (req, res, next) => {
+  Axe.find()
+    .populate('criteres')
+    .then(allTheAxes => {
+      res.json(allTheAxes);
     })
     .catch(err => {
       res.json(err);

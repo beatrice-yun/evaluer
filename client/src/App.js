@@ -15,8 +15,9 @@ import AoDetails from './components/grille/ao/AoDetails';
 import AxeDetails from './components/grille/axes/AxeDetails';
 import CandidatDetails from './components/grille/candidats/CandidatDetails';
 import CritereDetails from './components/grille/criteres/CritereDetails';
-import Analyse from "./components/analyse/Analyse";
-import CommentaireDetails from "./components/analyse/commentaires/CommentaireDetails";
+import Analyse from './components/analyse/Analyse';
+import NoteDetails from './components/analyse/notes/NoteDetails';
+import CommentaireDetails from './components/analyse/commentaires/CommentaireDetails';
 
 class App extends Component {
   constructor(props){
@@ -67,11 +68,11 @@ class App extends Component {
             {/* added to display candidat details page: */}
             <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/candidats/:candidatId" component={CandidatDetails} /> {/* <== !!! */}
 
-            {/* added to display the list of the commentaires: */}
-            <ProtectedRoute user={this.state.loggedInUser} exact path="/analyse" component={Analyse} />
+            <ProtectedRoute user={this.state.loggedInUser} exact path="/analyses" component={Analyse}/>
 
-            {/* added to display commentaire details page: */}
-            <ProtectedRoute user={this.state.loggedInUser} exact path="/commentaires/:commentaireId" component={CommentaireDetails} />
+            <ProtectedRoute user={this.state.loggedInUser} exact path="/notes/:id" component={NoteDetails} />
+
+            <ProtectedRoute user={this.state.loggedInUser} exact path="/notes/:id/commentaires/:commentaireId" component={CommentaireDetails} />
             
           </Switch>
         </div>
@@ -97,13 +98,13 @@ class App extends Component {
            
           {/* added to display candidat details page: */}
           <ProtectedRoute user={this.state.loggedInUser} exact path="/ao/:id/candidats/:candidatId" component={CandidatDetails} /> {/* <== !!! */}
-
-          {/* added to display the list of the commentaires: */}
-          <ProtectedRoute user={this.state.loggedInUser} exact path="/analyse" component={Analyse} />
-    
-          {/* added to display commentaire details page: */}
-          <ProtectedRoute user={this.state.loggedInUser} exact path="/commentaires/:commentaireId" component={CommentaireDetails} />
  
+          <ProtectedRoute user={this.state.loggedInUser} exact path="/analyses" component={Analyse}/>
+
+          <ProtectedRoute user={this.state.loggedInUser} exact path="/notes/:id" component={NoteDetails} />
+
+          <ProtectedRoute user={this.state.loggedInUser} exact path="/notes/:id/commentaires/:commentaireId" component={CommentaireDetails} />
+
         </Switch>
       </div>
       );

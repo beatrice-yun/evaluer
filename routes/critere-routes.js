@@ -7,22 +7,9 @@ const Critere = require('../models/critere-model');
 
 const router  = express.Router();
 
-// GET route => to get all the criteres
-router.get('/criteres', (req, res, next) => {
-  Critere.find()
-    .populate('commentaires')
-    .then(allTheCriteres => {
-      res.json(allTheCriteres);
-    })
-    .catch(err => {
-      res.json(err);
-    })
-});
-
 // GET route => to retrieve a specific critere
 router.get('/ao/:aoId/axes/:axeId/criteres/:critereId', (req, res, next) => {
   Critere.findById(req.params.critereId)
-  .populate("commentaires")
   .then(theCritere =>{
       res.json(theCritere);
   })
@@ -31,16 +18,24 @@ router.get('/ao/:aoId/axes/:axeId/criteres/:critereId', (req, res, next) => {
   })
 });
 
+// GET route => to get all the criteres
+router.get('/criteres', (req, res, next) => {
+  Critere.find()
+    .then(allTheCriteres => {
+      res.json(allTheCriteres);
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
+
 // POST route => to create a new critere
 router.post('/criteres', (req, res, next)=>{
   
   Critere.create({
       title: req.body.title,
       description: req.body.description,
-      note: req.body.note,
       axe: req.body.axeID,
-      candidat: req.body.candidatID,
-      commentaires: []
   })
     .then(response => {
         Axe.findByIdAndUpdate(req.body.axeID, { $push:{ criteres: response._id } })

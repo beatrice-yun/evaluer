@@ -5,28 +5,31 @@ const mongoose = require('mongoose');
 
 const router  = express.Router();
 const Analyse = require ('../models/analyse-model');
+const Note = require ('../models/note-model');
 
 // GET route to get all the analyses
 router.get('/analyses', (req, res, next) => {
   Analyse.find()
+    .populate('notes')
     .then(allTheAnalyses => {
       res.json(allTheAnalyses);
-    })
+    })                                         
     .catch(err => {
       res.json(err);
     })
 });
 
 // GET route => to get a specific analyse/detailed view
-router.get('/analyses/:analyseId', (req, res, next)=>{
-  if(!mongoose.Types.ObjectId.isValid(req.params.analyseId)) {
+router.get('/analyses/:id', (req, res, next)=>{
+  if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
 
-  Analyse.findById(req.params.analyseId)
-    .then(theAnalyse => {
-      res.status(200).json(theAnalyse);
+  Analyse.findById(req.params.id)
+    .populate('notes')
+    .then(response => {
+      res.status(200).json(response);
     })
     .catch(err => {
       res.json(err);
@@ -37,9 +40,9 @@ router.get('/analyses/:analyseId', (req, res, next)=>{
 router.post('/analyses', (req, res, next)=>{
   
   Analyse.create({
-      note: req.body.note,
-      critere: req.body.critereID,
-      candidat: req.body.candidatID
+      auteur: req.body.auteur,
+      ao: req.body.aoID,
+      notes: []
   })
 
       .then(response => {
