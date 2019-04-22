@@ -46,12 +46,12 @@ class AddCandidat extends Component {
     if(this.state.isShowing){
         return(
             <div>
-                  <h3>Add Candidat</h3>
+                  <h3>Ajouter un candidat :</h3>
                   <form onSubmit={this.handleFormSubmit}>
-                  <label>Title:</label>
+                  <label>Nom :</label>
                   <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
 
-                  <input type="submit" value="Submit" />
+                  <input type="submit" value="Ajouter" />
                   </form>
             </div>
           )
@@ -62,7 +62,7 @@ class AddCandidat extends Component {
     return(
       <div>
             <hr />
-            <button onClick={() => this.toggleForm()}> Add candidat </button>
+            <button onClick={() => this.toggleForm()}> Ajouter un candidat </button>
             { this.showAddCandidatForm() }
       </div>
     )

@@ -146,7 +146,7 @@ class Analyse extends Component {
       <div>
         <h1>Evaluer les offres</h1>
         <div>
-          <h3>Choisir un appel d'offres</h3>
+          <h3>Choisir un appel d'offres :</h3>
           <select value={this.state.selectedAo.value} 
             onChange={(e) => this.setState({selectedAo: e.target.value})}>
             <option>Choisir un appel d'offres</option>
@@ -157,7 +157,7 @@ class Analyse extends Component {
         </div>
         {/*<h3>Choisir un axe</h3>*/}
         <div>
-        <h3>Choisir un axe</h3>
+        <h3>Choisir un axe :</h3>
           <select value={this.state.selectedAxes} 
             onChange={(e) => this.setState({selectedAxes: e.target.value})}>
             <option>Choisir un axe</option>
@@ -168,7 +168,7 @@ class Analyse extends Component {
           </select>
         </div>
         <div>
-          <h3>Choisir un critère</h3>
+          <h3>Choisir un critère :</h3>
           <select value={this.state.selectedCritere} 
             onChange={(e) => this.setState({selectedCritere: e.target.value})}>
             <option>Choisir un critère</option>
@@ -179,7 +179,7 @@ class Analyse extends Component {
           </select>
         </div>
         <div>
-          <h3>Choisir un candidat</h3>
+          <h3>Choisir un candidat :</h3>
           <select value={this.state.selectedCandidat} 
             onChange={(e) => this.setState({selectedCandidat: e.target.value})}> {/*appeler ici la fonction qui prend l'ao sélectionné */}
             <option>Choisir un candidat</option>
@@ -191,7 +191,7 @@ class Analyse extends Component {
         </div>
         
         <div>
-        <h3>Note</h3>
+        <h3>Note attribuée :</h3>
         {this.state.notes.filter( note => note.critere === this.state.selectedCritere && note.candidat === this.state.selectedCandidat)
           .map((oneNote) => {
               return(
@@ -204,8 +204,9 @@ class Analyse extends Component {
               )    
           }) }
           
+          <h3>Attribuer une note :</h3>
           <form onSubmit={this.handleFormSubmit}>            
-              <label>Note:</label>
+              <label>Note :</label>
               <input type="text" name="note" value={this.state.note} onChange={ e => this.handleChange(e)}/>
               {/*
               <select name="note" value={this.state.note} onChange={ e => this.handleChange(e)}>
@@ -222,7 +223,7 @@ class Analyse extends Component {
             onChange={(e) => this.setState({critere: e.target.value})}/>
               <input name="candidat" value={this.state.selectedCandidat} 
             onChange={(e) => this.setState({candidat: e.target.value})}/>
-              <input type="submit" value="Submit" />
+              <input type="submit" value="Attribuer" />
           </form> 
         </div>
         {/*

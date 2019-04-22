@@ -28,11 +28,12 @@ class AddAo extends Component {
   render(){
     return(
       <div>
+        <h2>Créer un nouvel appel d'offres :</h2>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Title:</label>
+          <label>Nom :</label>
           <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
           
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Créer" />
         </form>
       </div>
     )

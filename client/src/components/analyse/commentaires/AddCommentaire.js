@@ -49,16 +49,16 @@ class AddCommentaire extends Component {
     if(this.state.isShowing){
         return(
             <div>
-                  <h3>Add commentaire</h3>
+                  <h3>Ajouter un commentaire :</h3>
                   <form onSubmit={this.handleFormSubmit}>
-                  <label>Description:</label>
-                  <input type="text" name="description" value={this.state.description} onChange={ e => this.handleChange(e)}/>
-                  <label>Page:</label>
-                  <textarea name="page" value={this.state.page} onChange={ e => this.handleChange(e)} />
-                  <label>Boolean:</label>
-                  <textarea name="boolean" value={this.state.boolean} onChange={ e => this.handleChange(e)} />
+                  <label>Description :</label>
+                  <textarea type="text" name="description" value={this.state.description} onChange={ e => this.handleChange(e)}/>
+                  <label>Page :</label>
+                  <input type="number" name="page" value={this.state.page} onChange={ e => this.handleChange(e)} />
+                  <label>Positif / négatif :</label>
+                  <input type="text" name="boolean" value={this.state.boolean} onChange={ e => this.handleChange(e)} />
                   
-                  <input type="submit" value="Submit" />
+                  <input type="submit" value="Ajouter" />
                   </form>
             </div>
           )
@@ -69,7 +69,7 @@ class AddCommentaire extends Component {
     return(
       <div>
             <hr />
-            <button onClick={() => this.toggleForm()}> Add commentaire </button>
+            <button onClick={() => this.toggleForm()}> Ajouter un commentaire </button>
             { this.showAddCommentaireForm() }
       </div>
     )

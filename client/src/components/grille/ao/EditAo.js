@@ -36,11 +36,11 @@ class EditAo extends Component {
     return (
       <div>
         <hr />
-        <h3>Edit form</h3>
+        <h3>Modifier le nom de l'appel d'offres :</h3>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Title:</label>
+          <label>Nouveau nom :</label>
           <input type="text" name="title" value={this.state.title} onChange={e => this.handleChangeTitle(e)}/>        
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Modifier" />
         </form>
       </div>
     )

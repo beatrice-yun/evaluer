@@ -47,14 +47,14 @@ class AddAxe extends Component {
     if(this.state.isShowing){
         return(
             <div>
-                  <h3>Add Axe</h3>
+                  <h3>Ajouter un axe :</h3>
                   <form onSubmit={this.handleFormSubmit}>
-                  <label>Title:</label>
+                  <label>Nom :</label>
                   <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
-                  <label>Description:</label>
+                  <label>Description :</label>
                   <textarea name="description" value={this.state.description} onChange={ e => this.handleChange(e)} />
                   
-                  <input type="submit" value="Submit" />
+                  <input type="submit" value="Ajouter" />
                   </form>
             </div>
           )
@@ -65,7 +65,7 @@ class AddAxe extends Component {
     return(
       <div>
             <hr />
-            <button onClick={() => this.toggleForm()}> Add axe </button>
+            <button onClick={() => this.toggleForm()}> Ajouter un axe </button>
             { this.showAddAxeForm() }
       </div>
     )

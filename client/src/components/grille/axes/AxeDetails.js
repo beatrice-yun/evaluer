@@ -46,7 +46,7 @@ class AxeDetails extends Component {
 
         <div>
         {/* show the critere heading only if there are criteres */}
-        { this.state.criteres && this.state.criteres.length > 0 && <h3>criteres </h3> }
+        { this.state.criteres && this.state.criteres.length > 0 && <h3>Liste des critères : </h3> }
         {/* map through the array of criteres and... */}
         { this.state.criteres && this.state.criteres.map((critere, index) => {
             return(
@@ -62,7 +62,7 @@ class AxeDetails extends Component {
         </div>
         <div>{this.renderAddCritereForm()} </div> {/* <== !!! */}
         <br/><br/><br/><br/><br/>
-        <Link to={'/ao'}>Back to ao</Link>
+        <Link to={'/ao'}>Revenir aux appels d'offres</Link>
       </div>
     )
   }

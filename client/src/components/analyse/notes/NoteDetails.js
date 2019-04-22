@@ -45,7 +45,7 @@ class NoteDetails extends Component {
 
         <div>
         {/* show the commentaire heading only if there are criteres */}
-        { this.state.commentaires && this.state.commentaires.length > 0 && <h3>Commentaires </h3> }
+        { this.state.commentaires && this.state.commentaires.length > 0 && <h3>Liste des commentaires :</h3> }
         {/* map through the array of commentaire and... */}
         { this.state.commentaires && this.state.commentaires.map((commentaire, index) => {
             return(
@@ -62,7 +62,7 @@ class NoteDetails extends Component {
         <div>{this.renderAddCommentaireForm()} </div> {/* <== !!! */}
         <br/>
         <br/><br/><br/><br/><br/>
-        <Link to={'/analyses'}>Back to analyses</Link>
+        <Link to={'/analyses'}>Revenir à la page d'accueil des évaluations</Link>
       </div>
     )
   }

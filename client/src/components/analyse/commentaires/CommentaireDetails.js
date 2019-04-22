@@ -31,10 +31,10 @@ class CommentaireDetails extends Component {
     return(
       <div>
         <p>{this.state.description}</p>
-        <p>Page: {this.state.page}</p>
-        <p>Positif/négatif: {this.state.boolean}</p>
+        <p><b>Page :</b> {this.state.page}</p>
+        <p><b>Positif/négatif :</b> {this.state.boolean}</p>
 
-        <Link to={'/analyses'}>Back to analyse</Link>
+        <Link to={'/analyses'}>Revenir à la page d'accueil des évaluations</Link>
       </div>
     )
   }

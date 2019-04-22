@@ -27,7 +27,8 @@ class AoList extends Component {
   render(){
     return(
       <div>
-        <h1>Listes des appels d'offres</h1>
+        <h1>Créer une grille d'analyse</h1>
+        <h2>Listes des appels d'offres existants :</h2>
         <div>
           { this.state.listOfAo.map( ao => {
             return (

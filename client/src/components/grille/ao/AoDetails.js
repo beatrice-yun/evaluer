@@ -80,7 +80,7 @@ class AoDetails extends Component {
         <div><h1>{this.state.title}</h1></div>
         <div>
         {/* show the axe heading only if there are axes */}
-        { this.state.axes && this.state.axes.length > 0 && <h3>Axes </h3> }
+        { this.state.axes && this.state.axes.length > 0 && <h3>Liste des axes : </h3> }
         {/* map through the array of axes and... */}
         { this.state.axes && this.state.axes.map((axe, index) => {
             return(
@@ -97,7 +97,7 @@ class AoDetails extends Component {
 
         <div>
         {/* show the candidat heading only if there are candidats */}
-        { this.state.candidats && this.state.candidats.length > 0 && <h3>Candidats </h3> }
+        { this.state.candidats && this.state.candidats.length > 0 && <h3>Liste des candidats : </h3> }
         {/* map through the array of candidats and... */}
         { this.state.candidats && this.state.candidats.map((candidat, index) => {
             return(
@@ -113,13 +113,13 @@ class AoDetails extends Component {
         </div>
 
         <div>{this.renderEditForm()} </div> {/* <== !!! */}
-        <button onClick={() => this.deleteAo()}>Delete ao</button> {/* <== !!! */}
+        <button onClick={() => this.deleteAo()}>Supprimer l'appel d'offres</button> {/* <== !!! */}
         <br/>
         <div>{this.renderAddAxeForm()} </div> {/* <== !!! */}
         <br/>
         <div>{this.renderAddCandidatForm()} </div> {/* <== !!! */}
         <br/><br/><br/><br/><br/>
-        <Link to={'/ao'}>Back to ao</Link>
+        <Link to={'/ao'}>Revenir à la liste des appels d'offres</Link>
       </div>
     )
   }

@@ -29,7 +29,7 @@ class Navbar extends Component {
       return(
         <nav className="nav-style">
           <ul>
-            <li>Welcome, {this.state.loggedInUser.username}</li>
+            <li>Bienvenue {this.state.loggedInUser.username} !</li>
             <li>
               <Link to='/ao' style={{ textDecoration: 'none' }}>Créer une grille d'analyse</Link>
             </li>
@@ -38,7 +38,7 @@ class Navbar extends Component {
             </li>
             <li>
               <Link to='/'>
-                <button onClick={() => this.logoutUser()}>Logout</button>
+                <button onClick={() => this.logoutUser()}>Se déconnecter</button>
               </Link>
             </li>
           </ul>

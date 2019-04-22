@@ -32,15 +32,15 @@ class Login extends Component {
     return(
       <div>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Username:</label>
+          <label>Votre pseudo :</label>
           <input type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
-          <label>Password:</label>
-          <textarea name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
+          <label>Votre mot de passe :</label>
+          <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
           
-          <input type="submit" value="Login" />
+          <input type="submit" value="Se connecter" />
         </form>
-        <p>Don't have account? 
-            <Link to={"/signup"}> Signup</Link>
+        <p>Pas encore de compte ? 
+            <Link to={"/signup"}> S'inscrire</Link>
         </p>
       </div>
     )
