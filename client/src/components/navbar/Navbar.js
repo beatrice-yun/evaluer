@@ -49,8 +49,8 @@ class Navbar extends Component {
         <div>
         <nav className="nav-style">
           <ul>
-            <li><Link to='/' style={{ textDecoration: 'none' }}>Login</Link></li>
-            <li><Link to='/signup' style={{ textDecoration: 'none' }}>Signup</Link></li>
+            <li><Link to='/' style={{ textDecoration: 'none' }}>Se connecter</Link></li>
+            <li><Link to='/signup' style={{ textDecoration: 'none' }}>S'inscrire</Link></li>
           </ul>
         </nav>
         </div>
