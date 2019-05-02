@@ -12,7 +12,7 @@ class AddAo extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     const title = this.state.title;
-    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/ao`, { title })
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/ao`, { title }, {withCredentials:true})
     .then( () => {
         // this.props.getData();
         this.setState({title: ""});
@@ -28,7 +28,8 @@ class AddAo extends Component {
   render(){
     return(
       <div>
-        <h2>Créer un nouvel appel d'offres :</h2>
+        <hr />
+        <h3>Créer un nouvel appel d'offres :</h3>
         <form onSubmit={this.handleFormSubmit}>
           <label>Nom :</label>
           <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>

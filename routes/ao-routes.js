@@ -14,6 +14,7 @@ router.post('/ao', (req, res, next)=>{
     title: req.body.title,
     axes: [],
     candidats: [],
+    owner: req.user._id
   })
     .then(response => {
       res.json(response);

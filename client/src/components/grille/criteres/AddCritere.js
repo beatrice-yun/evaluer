@@ -13,13 +13,14 @@ class AddCritere extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     const title = this.state.title;
+    const description = this.state.description;
     const axeID = this.props.theAxe._id; // <== we need to know to which axe the created axe belong, so we need to get its 'id'
                                                 // it has to be the 'id' because we are referencing ao 
                                                 // by its id in the axe model on the server side ( ao: {type: Schema.Types.ObjectId, ref: 'Ao'})
     
     // { title, axeID } => this is 'req.body' that will be received on the server side in this route, 
     // so the names have to match
-    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/criteres`, { title, axeID })
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/criteres`, { title, description, axeID })
     .then( () => {
           // after submitting the form, retrieve axe one more time so the new critere is displayed as well 
           //              |
@@ -63,7 +64,6 @@ class AddCritere extends Component {
   render(){
     return(
       <div>
-            <hr />
             <button onClick={() => this.toggleForm()}> Ajouter un critère </button>
             { this.showAddCritereForm() }
       </div>

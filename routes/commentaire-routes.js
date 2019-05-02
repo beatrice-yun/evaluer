@@ -23,7 +23,11 @@ router.get('/commentaires', (req, res, next) => {
 });
 
 // GET route => to get a specific commentaire/detailed view
-router.get('/notes/:noteId/commentaires/:commentaireId', (req, res, next) => {
+router.get('/commentaires/:commentaireId', (req, res, next) => {
+  if(!mongoose.Types.ObjectId.isValid(req.params.commentaireId)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
   Commentaire.findById(req.params.commentaireId)
   .then(theCommentaire =>{
       res.json(theCommentaire);
@@ -58,7 +62,7 @@ router.post('/commentaires', (req, res, next)=>{
 });
 
 // PUT route => to update a specific commentaire
-router.put('/notes/:noteId/commentaires/:commentaireId', (req, res, next)=>{
+router.put('/commentaires/:id', (req, res, next)=>{
 
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
@@ -75,7 +79,7 @@ router.put('/notes/:noteId/commentaires/:commentaireId', (req, res, next)=>{
 });
 
 // DELETE route => to delete a specific commentaire
-router.delete('/notes/:noteId/commentaires/:commentaireId', (req, res, next)=>{
+router.delete('/commentaires/:id', (req, res, next)=>{
 
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });

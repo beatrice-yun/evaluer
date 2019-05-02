@@ -19,7 +19,7 @@ class AoDetails extends Component {
 
   getSingleAo = () => {
       const { params } = this.props.match;
-      axios.get(`${process.env.REACT_APP_APIURL || ""}/api/ao/${params.id}`)
+      axios.get(`${process.env.REACT_APP_APIURL || ""}/api/ao/${params.id}`, {withCredentials:true})
       .then( responseFromApi =>{
           const theAo = responseFromApi.data;
           this.setState(theAo);
@@ -45,7 +45,7 @@ class AoDetails extends Component {
   // DELETE AO :
   deleteAo = () => {
     const { params } = this.props.match;
-    axios.delete(`${process.env.REACT_APP_APIURL || ""}/api/ao/${params.id}`)
+    axios.delete(`${process.env.REACT_APP_APIURL || ""}/api/ao/${params.id}`, {withCredentials:true})
     .then( () =>{
         this.props.history.push('/ao'); // !!!         
     })
@@ -74,6 +74,18 @@ class AoDetails extends Component {
       }
   }
 
+  // ONLY THE OWNER CAN EDIT ET DELETE :
+  ownershipCheck = (ao) => {
+    if(this.props.loggedInUser && ao.owner === this.props.loggedInUser._id) {
+     return (
+       <div>
+         <div>{this.renderEditForm()} </div> {/* <== !!! */}
+         <button onClick={() => this.deleteAo()}>Supprimer l'appel d'offres</button> {/* <== !!! */}
+       </div>
+         )
+       }
+     }
+
   render(){
     return(
       <div>
@@ -95,6 +107,8 @@ class AoDetails extends Component {
         }) }
         </div>
 
+        <div>{this.renderAddAxeForm()} </div> {/* <== !!! */}
+
         <div>
         {/* show the candidat heading only if there are candidats */}
         { this.state.candidats && this.state.candidats.length > 0 && <h3>Liste des candidats : </h3> }
@@ -107,17 +121,15 @@ class AoDetails extends Component {
                         { candidat.title }
                     </Link>
                     </div>
-            )
-            
+            )         
         }) }
+        <div>{this.renderAddCandidatForm()} </div> {/* <== !!! */}
         </div>
 
-        <div>{this.renderEditForm()} </div> {/* <== !!! */}
-        <button onClick={() => this.deleteAo()}>Supprimer l'appel d'offres</button> {/* <== !!! */}
-        <br/>
-        <div>{this.renderAddAxeForm()} </div> {/* <== !!! */}
-        <br/>
-        <div>{this.renderAddCandidatForm()} </div> {/* <== !!! */}
+        <div >
+          {this.ownershipCheck(this.state)}
+        </div>
+
         <br/><br/><br/><br/><br/>
         <Link to={'/ao'}>Revenir à la liste des appels d'offres</Link>
       </div>

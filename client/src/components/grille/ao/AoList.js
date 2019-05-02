@@ -12,7 +12,7 @@ class AoList extends Component {
   }
 
   getAllAo= () =>{
-    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/ao`)
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/ao`, {withCredentials:true})
     .then(responseFromApi => {
       this.setState({
         listOfAo: responseFromApi.data
@@ -28,13 +28,14 @@ class AoList extends Component {
     return(
       <div>
         <h1>Créer une grille d'analyse</h1>
-        <h2>Listes des appels d'offres existants :</h2>
+        <h3>Listes des appels d'offres existants :</h3>
         <div>
-          { this.state.listOfAo.map( ao => {
+          {this.state.listOfAo.filter(ao => this.props.loggedInUser && ao.owner === this.props.loggedInUser._id)
+          .map( ao => {
             return (
               <div key={ao._id}>
                 <Link to={`/ao/${ao._id}`}>
-                  <h3>{ao.title}</h3>
+                  {ao.title}
                 </Link>
                 {/* <p style={{maxWidth: '400px'}} >{project.description} </p> */}
               </div>

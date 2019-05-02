@@ -24,6 +24,10 @@ router.get('/notes', (req, res, next) => {
 
 // GET route => to get a specific note/detailed view
 router.get('/notes/:noteId', (req, res, next)=>{
+  if(!mongoose.Types.ObjectId.isValid(req.params.noteId)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
   Note.findById(req.params.noteId)
   .populate("commentaires")
   .then(theNote =>{
@@ -60,7 +64,7 @@ router.post('/notes', (req, res, next)=>{
 });
 
 // PUT route => to update a specific note
-router.put('/notes/:noteId', (req, res, next)=>{
+router.put('/notes/:id', (req, res, next)=>{
 
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
@@ -77,7 +81,7 @@ router.put('/notes/:noteId', (req, res, next)=>{
 });
 
 // DELETE route => to delete a specific analyse
-router.delete('/notes/:noteId', (req, res, next)=>{
+router.delete('/notes/:id', (req, res, next)=>{
 
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });

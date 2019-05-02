@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import EditNote from './EditNote';
 import AddCommentaire from '../commentaires/AddCommentaire';
 
 class NoteDetails extends Component {
@@ -15,13 +16,37 @@ class NoteDetails extends Component {
     this.getSingleNote();
   }
 
-
   getSingleNote = () => {
     const { params } = this.props.match;
     axios.get(`${process.env.REACT_APP_APIURL || ""}/api/notes/${params.id}`)
     .then( responseFromApi =>{
       const theNote = responseFromApi.data;
       this.setState(theNote);
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+  }
+
+    // EDIT NOTE :
+    renderEditForm = () => {
+      if(!this.state.note){
+        this.getSingleNote();
+      } else {
+      //                                                    {...props} => so we can have 'this.props.history' in Edit.js
+      //                                                                                          ^
+      //                                                                                          |
+        return <EditNote theNote={this.state} getTheNote={this.getSingleNote} {...this.props} />
+          
+      }
+    }
+
+      // DELETE NOTE :
+  deleteNote = () => {
+    const { params } = this.props.match;
+    axios.delete(`${process.env.REACT_APP_APIURL || ""}/api/notes/${params.id}`)
+    .then( () =>{
+        this.props.history.push('/analyses'); // !!!         
     })
     .catch((err)=>{
         console.log(err)
@@ -61,6 +86,8 @@ class NoteDetails extends Component {
         </div>
         <div>{this.renderAddCommentaireForm()} </div> {/* <== !!! */}
         <br/>
+        <div>{this.renderEditForm()} </div> {/* <== !!! */}
+        <button onClick={() => this.deleteNote()}>Supprimer la note</button> {/* <== !!! */}
         <br/><br/><br/><br/><br/>
         <Link to={'/analyses'}>Revenir à la page d'accueil des évaluations</Link>
       </div>

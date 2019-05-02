@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import AddCritere from '../criteres/AddCritere';
+import EditAxe from './EditAxe';
 
 class AxeDetails extends Component {
   constructor(props){
@@ -37,6 +38,31 @@ class AxeDetails extends Component {
           return <AddCritere theAxe={this.state} getTheAxe={this.getSingleAxe} />
         }
     }
+  
+    // EDIT AXE
+    renderEditForm = () => {
+      if(!this.state.title){
+        this.getSingleAxe();
+      } else {
+      //                                                    {...props} => so we can have 'this.props.history' in Edit.js
+      //                                                                                          ^
+      //                                                                                          |
+        return <EditAxe theAxe={this.state} getTheAxe={this.getSingleAxe} {...this.props} />
+          
+      }
+    }
+    
+    // DELETE AXE
+    deleteAxe = () => {
+      const { params } = this.props.match;
+      axios.delete(`${process.env.REACT_APP_APIURL || ""}/api/axes/${params.axeId}`)
+      .then( () =>{
+          this.props.history.push('/ao'); // !!!         
+      })
+      .catch((err)=>{
+          console.log(err)
+      })
+    }
 
   render(){
     return(
@@ -61,6 +87,8 @@ class AxeDetails extends Component {
         }) }
         </div>
         <div>{this.renderAddCritereForm()} </div> {/* <== !!! */}
+        <div>{this.renderEditForm()} </div>
+        <button onClick={() => this.deleteAxe()}>Supprimer l'axe</button> {/* <== !!! */}
         <br/><br/><br/><br/><br/>
         <Link to={'/ao'}>Revenir aux appels d'offres</Link>
       </div>

@@ -1,45 +1,43 @@
-// components/projects/EditAo.js
+// components/projects/EditCandidat.js
 
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class EditAo extends Component {
+class EditCandidat extends Component {
   constructor(props){
     super(props);
     this.state = {
-        title: this.props.theAo.title, 
+        title: this.props.theCandidat.title
     }
   }
-
     
   handleFormSubmit = (event) => {
     const title = this.state.title;
 
     event.preventDefault();
 
-    axios.put(`${process.env.REACT_APP_APIURL || ""}/api/ao/${this.props.theAo._id}`, { title }, {withCredentials:true})
+    axios.put(`${process.env.REACT_APP_APIURL || ""}/api/candidats/${this.props.theCandidat._id}`, { title })
     .then( () => {
-        this.props.getTheAo();
+        this.props.getTheCandidat();
         // after submitting the form, redirect to '/ao'
         this.props.history.push('/ao');    
     })
     .catch( error => console.log(error) )
   }
 
-  handleChangeTitle = (event) => {  
-    this.setState({
-      title:event.target.value
-    })
-  }
+  handleChangeCandidat = (event) => {  
+    const {name, value} = event.target;
+    this.setState({[name]: value});
+}
 
   render(){
     return (
       <div>
         <hr />
-        <h3>Modifier le nom de l'appel d'offres :</h3>
+        <h3>Modifier le candidat :</h3>
         <form onSubmit={this.handleFormSubmit}>
           <label>Nouveau nom :</label>
-          <input type="text" name="title" value={this.state.title} onChange={e => this.handleChangeTitle(e)}/>        
+          <input type="text" name="title" value={this.state.title} onChange={e => this.handleChangeCandidat(e)}/>        
           <input type="submit" value="Modifier" />
         </form>
       </div>
@@ -47,4 +45,4 @@ class EditAo extends Component {
   }
 }
 
-export default EditAo;
+export default EditCandidat;

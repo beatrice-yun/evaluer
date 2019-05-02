@@ -68,7 +68,6 @@ class AddCommentaire extends Component {
   render(){
     return(
       <div>
-            <hr />
             <button onClick={() => this.toggleForm()}> Ajouter un commentaire </button>
             { this.showAddCommentaireForm() }
       </div>

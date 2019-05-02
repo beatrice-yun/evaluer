@@ -64,7 +64,6 @@ class AddAxe extends Component {
   render(){
     return(
       <div>
-            <hr />
             <button onClick={() => this.toggleForm()}> Ajouter un axe </button>
             { this.showAddAxeForm() }
       </div>

@@ -28,6 +28,7 @@ class Analyse extends Component {
     critere: "",
     candidat: "",
     note: "",
+    owner: ""
   }
 }
 
@@ -38,8 +39,8 @@ class Analyse extends Component {
       return response.json();
     })
     .then(data => {
-      let aoFromAPI = data.map(oneAo => { return {value: oneAo._id, display: oneAo.title} })
-      this.setState({ ao: [{value: '', display: ''}].concat(aoFromAPI) });
+      let aoFromAPI = data.map(oneAo => { return {value: oneAo._id, display: oneAo.title, owner: oneAo.owner} })
+      this.setState({ ao: [{value: '', display: '', owner: ''}].concat(aoFromAPI) });
     }).catch(error => {
       console.log(error);
     });
@@ -150,7 +151,8 @@ class Analyse extends Component {
           <select value={this.state.selectedAo.value} 
             onChange={(e) => this.setState({selectedAo: e.target.value})}>
             <option>Choisir un appel d'offres</option>
-            {this.state.ao.map((oneAo) => { 
+            {this.state.ao.filter(oneAo => this.props.loggedInUser && oneAo.owner === this.props.loggedInUser._id)
+            .map((oneAo) => { 
             return <option key={oneAo.value} value={oneAo.value}>{oneAo.display}</option>})}
 
           </select>
@@ -219,9 +221,9 @@ class Analyse extends Component {
               </select>
               */}
 
-              <input name="critere" value={this.state.selectedCritere} 
+              <input type="hidden" name="critere" value={this.state.selectedCritere} 
             onChange={(e) => this.setState({critere: e.target.value})}/>
-              <input name="candidat" value={this.state.selectedCandidat} 
+              <input type="hidden" name="candidat" value={this.state.selectedCandidat} 
             onChange={(e) => this.setState({candidat: e.target.value})}/>
               <input type="submit" value="Attribuer" />
           </form> 
