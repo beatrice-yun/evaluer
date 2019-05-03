@@ -47,6 +47,7 @@ router.post('/notes', (req, res, next)=>{
       analyse: req.body.analyseID,
       critere: req.body.critere,
       candidat: req.body.candidat,
+      auteur: req.body.auteur,
       commentaires: []
   })
       .then(response => {

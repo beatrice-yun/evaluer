@@ -12,6 +12,7 @@ const noteSchema = new Schema({
   analyse: {type: Schema.Types.ObjectId, ref: 'Analyse'},
   critere: String,
   candidat: String,
+  auteur: String,
   commentaires: [{type: Schema.Types.ObjectId, ref:'Commentaire'}]
   // owner will be added later on
 });

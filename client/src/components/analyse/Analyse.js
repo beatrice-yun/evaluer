@@ -28,7 +28,8 @@ class Analyse extends Component {
     critere: "",
     candidat: "",
     note: "",
-    owner: ""
+    owner: "",
+    auteur: ""
   }
 }
 
@@ -83,8 +84,8 @@ class Analyse extends Component {
       return response.json();
     })
     .then(data => {
-      let noteFromAPI = data.map(oneNote => { return {value: oneNote._id, display: oneNote.note, critere: oneNote.critere, candidat: oneNote.candidat} })
-      this.setState({ notes: [{value: '', display: '', critere: '', candidat:''}].concat(noteFromAPI) });
+      let noteFromAPI = data.map(oneNote => { return {value: oneNote._id, display: oneNote.note, critere: oneNote.critere, candidat: oneNote.candidat, auteur: oneNote.auteur} })
+      this.setState({ notes: [{value: '', display: '', critere: '', candidat:'', auteur: ''}].concat(noteFromAPI) });
     }).catch(error => {
       console.log(error);
     });
@@ -117,11 +118,12 @@ class Analyse extends Component {
     const candidat = this.state.selectedCandidat;
     const note = this.state.note;
     const title = this.state.title;
+    const auteur = this.state.auteur;
     
-    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/notes`, { title, note, critere, candidat })
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/notes`, { title, note, critere, candidat, auteur })
     .then( () => {
         // this.props.getData();
-        this.setState({title:"", note: "", critere: "", candidat: ""});
+        this.setState({title:"", note: "", critere: "", candidat: "", auteur: ""});
     })
     .catch( error => console.log(error) )
   
@@ -200,7 +202,7 @@ class Analyse extends Component {
                   <div key={ oneNote.value } value={oneNote.value}>
                   {/* ... make each axe's title a link that goes to the axes details page */}
                       <Link to={`/notes/${oneNote.value}`}> 
-                          { oneNote.display }
+                          { oneNote.display } { oneNote.auteur }
                       </Link>
                       </div>
               )    
@@ -220,7 +222,8 @@ class Analyse extends Component {
                 <option value="+">--</option>
               </select>
               */}
-
+              <label>Auteur :</label>
+              <input type="text" name="auteur" value={this.state.auteur} onChange={ e => this.handleChange(e)}/>
               <input type="hidden" name="critere" value={this.state.selectedCritere} 
             onChange={(e) => this.setState({critere: e.target.value})}/>
               <input type="hidden" name="candidat" value={this.state.selectedCandidat} 
