@@ -76,7 +76,7 @@ class NoteDetails extends Component {
             return(
                 <div key={ index }>
                 {/* ... make each critere's title a link that goes to the criteres details page */}
-                    <Link to={`/notes/${this.state._id}/commentaires/${commentaire._id}`}> 
+                    <Link class="link" to={`/notes/${this.state._id}/commentaires/${commentaire._id}`}> 
                         { commentaire.description }
                     </Link>
                     </div>
@@ -84,12 +84,14 @@ class NoteDetails extends Component {
             
         }) }
         </div>
+        <br/>
         <div>{this.renderAddCommentaireForm()} </div> {/* <== !!! */}
         <br/>
         <div>{this.renderEditForm()} </div> {/* <== !!! */}
-        <button onClick={() => this.deleteNote()}>Supprimer la note</button> {/* <== !!! */}
+        <br/>
+        <button class="button-red" onClick={() => this.deleteNote()}>Supprimer la note</button> {/* <== !!! */}
         <br/><br/><br/><br/><br/>
-        <Link to={'/analyses'}>Revenir à la page d'accueil des évaluations</Link>
+        <Link class="link" to={'/analyses'}>Revenir à la page d'accueil des évaluations</Link>
       </div>
     )
   }

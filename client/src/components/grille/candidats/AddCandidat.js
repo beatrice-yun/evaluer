@@ -49,9 +49,10 @@ class AddCandidat extends Component {
                   <h3>Ajouter un candidat :</h3>
                   <form onSubmit={this.handleFormSubmit}>
                   <label>Nom :</label>
-                  <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
-
-                  <input type="submit" value="Ajouter" />
+                  <input class="text-input" type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
+                  <br/>
+                  <br/>
+                  <input class="button-light" type="submit" value="Ajouter" />
                   </form>
             </div>
           )
@@ -61,7 +62,7 @@ class AddCandidat extends Component {
   render(){
     return(
       <div>
-            <button onClick={() => this.toggleForm()}> Ajouter un candidat </button>
+            <button class="button" onClick={() => this.toggleForm()}> Ajouter un candidat </button>
             { this.showAddCandidatForm() }
       </div>
     )

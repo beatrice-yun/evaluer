@@ -40,10 +40,14 @@ class EditNote extends Component {
         <h3>Modifier la note attribuée :</h3>
         <form onSubmit={this.handleFormSubmit}>
           <label>Nouvelle note :</label>
-          <input type="text" name="note" value={this.state.note} onChange={e => this.handleChangeNote(e)}/>
+          <input class="text-input" type="text" name="note" value={this.state.note} onChange={e => this.handleChangeNote(e)}/>
+          <br/>
+          <br/>
           <label>Nouvel auteur :</label>
-          <input type="text" name="auteur" value={this.state.auteur} onChange={e => this.handleChangeNote(e)}/>
-          <input type="submit" value="Modifier" />
+          <input class="text-input" type="text" name="auteur" value={this.state.auteur} onChange={e => this.handleChangeNote(e)}/>
+          <br/>
+          <br/>
+          <input class="button-light" type="submit" value="Modifier" />
         </form>
       </div>
     )

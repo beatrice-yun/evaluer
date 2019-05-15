@@ -39,8 +39,10 @@ class EditAo extends Component {
         <h3>Modifier le nom de l'appel d'offres :</h3>
         <form onSubmit={this.handleFormSubmit}>
           <label>Nouveau nom :</label>
-          <input type="text" name="title" value={this.state.title} onChange={e => this.handleChangeTitle(e)}/>        
-          <input type="submit" value="Modifier" />
+          <input class="text-input" type="text" name="title" value={this.state.title} onChange={e => this.handleChangeTitle(e)}/> 
+          <br/>
+          <br/> 
+          <input class="button-light" type="submit" value="Modifier" />
         </form>
       </div>
     )

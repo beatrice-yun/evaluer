@@ -57,7 +57,8 @@ class CritereDetails extends Component {
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
         <div>{this.renderEditForm()} </div>
-        <button onClick={() => this.deleteCritere()}>Supprimer le critère</button> {/* <== !!! */}
+        <br/>
+        <button class="button-red" onClick={() => this.deleteCritere()}>Supprimer le critère</button> {/* <== !!! */}
       </div>
     )
   }

@@ -28,19 +28,23 @@ class Navbar extends Component {
     if(this.state.loggedInUser){
       return(
         <nav className="nav-style">
+        <br/>
           <ul>
-            <li>Bienvenue {this.state.loggedInUser.username} !</li>
+            <li class="text-nav1">Vous êtes connecté sur le profil de {this.state.loggedInUser.username}.</li>
+            <br/>
             <li>
-              <Link to='/ao' style={{ textDecoration: 'none' }}>Créer une grille d'analyse</Link>
+              <Link to='/ao' style={{ textDecoration: 'none' }} class="text-nav">Créer une grille d'analyse</Link>
             </li>
             <li>
-              <Link to='/analyses' style={{ textDecoration: 'none' }}>Evaluer les offres</Link>
+              <Link to='/analyses' style={{ textDecoration: 'none' }} class="text-nav">Evaluer les offres</Link>
             </li>
+            <br/>
             <li>
               <Link to='/'>
-                <button onClick={() => this.logoutUser()}>Se déconnecter</button>
+                <button class="logout-button" onClick={() => this.logoutUser()}>Se déconnecter</button>
               </Link>
             </li>
+            <br/>
           </ul>
         </nav>
       )
@@ -48,11 +52,19 @@ class Navbar extends Component {
       return (
         <div>
         <nav className="nav-style">
+        <br/>
+        <h1 class="text-nav2">EVALUER</h1>
+        <h3 class="text-nav1">L'outil d'évaluation des offres dédié aux marchés publics.</h3>
+        {/*
           <ul>
-            <li><Link to='/' style={{ textDecoration: 'none' }}>Se connecter</Link></li>
-            <li><Link to='/signup' style={{ textDecoration: 'none' }}>S'inscrire</Link></li>
+            <li><Link to='/' style={{ textDecoration: 'none' }} class="text-nav">Se connecter</Link></li>
+            <li><Link to='/signup' style={{ textDecoration: 'none' }}class="text-nav">S'inscrire</Link></li>
+            <br/>
           </ul>
+        */}
+        <br/>
         </nav>
+        <br/>
         </div>
       )
     }

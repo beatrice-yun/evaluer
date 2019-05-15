@@ -80,7 +80,9 @@ class AoDetails extends Component {
      return (
        <div>
          <div>{this.renderEditForm()} </div> {/* <== !!! */}
-         <button onClick={() => this.deleteAo()}>Supprimer l'appel d'offres</button> {/* <== !!! */}
+         <br/>
+         <br/>
+         <button class="button-red" onClick={() => this.deleteAo()}>Supprimer l'appel d'offres</button> {/* <== !!! */}
        </div>
          )
        }
@@ -98,7 +100,7 @@ class AoDetails extends Component {
             return(
                 <div key={ index }>
                 {/* ... make each axe's title a link that goes to the axes details page */}
-                    <Link to={`/ao/${this.state._id}/axes/${axe._id}`}> 
+                    <Link class="link" to={`/ao/${this.state._id}/axes/${axe._id}`}> 
                         { axe.title }
                     </Link>
                     </div>
@@ -106,7 +108,7 @@ class AoDetails extends Component {
             
         }) }
         </div>
-
+        <br/>
         <div>{this.renderAddAxeForm()} </div> {/* <== !!! */}
 
         <div>
@@ -117,12 +119,13 @@ class AoDetails extends Component {
             return(
                 <div key={ index }>
                 {/* ... make each axe's title a link that goes to the candidats details page */}
-                    <Link to={`/ao/${this.state._id}/candidats/${candidat._id}`}> 
+                    <Link class="link" to={`/ao/${this.state._id}/candidats/${candidat._id}`}> 
                         { candidat.title }
                     </Link>
                     </div>
             )         
         }) }
+        <br/>
         <div>{this.renderAddCandidatForm()} </div> {/* <== !!! */}
         </div>
 
@@ -131,7 +134,7 @@ class AoDetails extends Component {
         </div>
 
         <br/><br/><br/><br/><br/>
-        <Link to={'/ao'}>Revenir à la liste des appels d'offres</Link>
+        <Link class="link" to={'/ao'}>Revenir à la liste des appels d'offres</Link>
       </div>
     )
   }

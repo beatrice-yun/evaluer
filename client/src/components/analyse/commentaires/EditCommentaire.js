@@ -41,12 +41,18 @@ class EditCommentaire extends Component {
         <h3>Modifier le commentaire :</h3>
         <form onSubmit={this.handleFormSubmit}>
           <label>Nouvelle description :</label>
-          <textarea type="text" name="description" value={this.state.description} onChange={e => this.handleChangeCommentaire(e)}/>
+          <textarea class="text-input" type="text" name="description" value={this.state.description} onChange={e => this.handleChangeCommentaire(e)}/>
+          <br/>
+          <br/>
           <label>Nouvelle page :</label>
-          <input type="number" name="page" value={this.state.page} onChange={e => this.handleChangeCommentaire(e)}/>   
+          <input class="text-input" type="number" name="page" value={this.state.page} onChange={e => this.handleChangeCommentaire(e)}/>   
+          <br/>
+          <br/>
           <label>Nouvelle qualification positif / négatif :</label>
-          <input type="text" name="boolean" value={this.state.boolean} onChange={e => this.handleChangeCommentaire(e)}/>           
-          <input type="submit" value="Modifier" />
+          <input class="text-input" type="text" name="boolean" value={this.state.boolean} onChange={e => this.handleChangeCommentaire(e)}/>  
+          <br/>
+          <br/>      
+          <input class="button-light" type="submit" value="Modifier" />
         </form>
       </div>
     )

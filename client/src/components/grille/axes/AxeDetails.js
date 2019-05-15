@@ -78,7 +78,7 @@ class AxeDetails extends Component {
             return(
                 <div key={ index }>
                 {/* ... make each critere's title a link that goes to the criteres details page */}
-                    <Link to={`/ao/${this.state._id}/axes/${this.state._id}/criteres/${critere._id}`}> {/*je pense ici il va y avoir un probleme car this.state._id de ao n'est pas possible, il faut p-e en faire un this.getSingleAO._id ? */}
+                    <Link class="link" to={`/ao/${this.state._id}/axes/${this.state._id}/criteres/${critere._id}`}> {/*je pense ici il va y avoir un probleme car this.state._id de ao n'est pas possible, il faut p-e en faire un this.getSingleAO._id ? */}
                         { critere.title }
                     </Link>
                     </div>
@@ -86,11 +86,13 @@ class AxeDetails extends Component {
             
         }) }
         </div>
+        <br/>
         <div>{this.renderAddCritereForm()} </div> {/* <== !!! */}
         <div>{this.renderEditForm()} </div>
-        <button onClick={() => this.deleteAxe()}>Supprimer l'axe</button> {/* <== !!! */}
+        <br/>
+        <button class="button-red" onClick={() => this.deleteAxe()}>Supprimer l'axe</button> {/* <== !!! */}
         <br/><br/><br/><br/><br/>
-        <Link to={'/ao'}>Revenir aux appels d'offres</Link>
+        <Link class="link" to={'/ao'}>Revenir aux appels d'offres</Link>
       </div>
     )
   }

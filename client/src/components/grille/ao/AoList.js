@@ -34,7 +34,7 @@ class AoList extends Component {
           .map( ao => {
             return (
               <div key={ao._id}>
-                <Link to={`/ao/${ao._id}`}>
+                <Link to={`/ao/${ao._id}`} class="link">
                   {ao.title}
                 </Link>
                 {/* <p style={{maxWidth: '400px'}} >{project.description} </p> */}

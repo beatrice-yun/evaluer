@@ -39,10 +39,14 @@ class EditAxe extends Component {
         <h3>Modifier l'axe :</h3>
         <form onSubmit={this.handleFormSubmit}>
           <label>Nouveau nom :</label>
-          <input type="text" name="title" value={this.state.title} onChange={e => this.handleChangeAxe(e)}/>
+          <input class="text-input" type="text" name="title" value={this.state.title} onChange={e => this.handleChangeAxe(e)}/>
+          <br/>
+          <br/>
           <label>Nouvelle description :</label>
-          <textarea type="text" name="description" value={this.state.description} onChange={e => this.handleChangeAxe(e)}/>          
-          <input type="submit" value="Modifier" />
+          <textarea class="text-input" type="text" name="description" value={this.state.description} onChange={e => this.handleChangeAxe(e)}/>  
+          <br/>
+          <br/>        
+          <input class="button-light" type="submit" value="Modifier" />
         </form>
       </div>
     )

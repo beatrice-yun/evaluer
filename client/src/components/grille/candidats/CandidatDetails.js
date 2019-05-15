@@ -56,7 +56,8 @@ class CandidatDetails extends Component {
       <div>
         <h1>{this.state.title}</h1>
         <div>{this.renderEditForm()} </div>
-        <button onClick={() => this.deleteCandidat()}>Supprimer l'axe</button> {/* <== !!! */}
+        <br/>
+        <button class="button-red" onClick={() => this.deleteCandidat()}>Supprimer l'axe</button> {/* <== !!! */}
       </div>
     )
   }

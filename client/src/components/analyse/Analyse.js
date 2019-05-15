@@ -150,7 +150,7 @@ class Analyse extends Component {
         <h1>Evaluer les offres</h1>
         <div>
           <h3>Choisir un appel d'offres :</h3>
-          <select value={this.state.selectedAo.value} 
+          <select class="select" value={this.state.selectedAo.value} 
             onChange={(e) => this.setState({selectedAo: e.target.value})}>
             <option>Choisir un appel d'offres</option>
             {this.state.ao.filter(oneAo => this.props.loggedInUser && oneAo.owner === this.props.loggedInUser._id)
@@ -162,7 +162,7 @@ class Analyse extends Component {
         {/*<h3>Choisir un axe</h3>*/}
         <div>
         <h3>Choisir un axe :</h3>
-          <select value={this.state.selectedAxes} 
+          <select class="select" value={this.state.selectedAxes} 
             onChange={(e) => this.setState({selectedAxes: e.target.value})}>
             <option>Choisir un axe</option>
             {this.state.axes.filter( axe => axe.ao === this.state.selectedAo)
@@ -173,7 +173,7 @@ class Analyse extends Component {
         </div>
         <div>
           <h3>Choisir un critère :</h3>
-          <select value={this.state.selectedCritere} 
+          <select class="select" value={this.state.selectedCritere} 
             onChange={(e) => this.setState({selectedCritere: e.target.value})}>
             <option>Choisir un critère</option>
             {this.state.criteres.filter( critere => critere.axe === this.state.selectedAxes)
@@ -184,7 +184,7 @@ class Analyse extends Component {
         </div>
         <div>
           <h3>Choisir un candidat :</h3>
-          <select value={this.state.selectedCandidat} 
+          <select class="select" value={this.state.selectedCandidat} 
             onChange={(e) => this.setState({selectedCandidat: e.target.value})}> {/*appeler ici la fonction qui prend l'ao sélectionné */}
             <option>Choisir un candidat</option>
             {this.state.candidats.filter( candidat => candidat.ao === this.state.selectedAo)
@@ -195,13 +195,13 @@ class Analyse extends Component {
         </div>
         
         <div>
-        <h3>Note attribuée :</h3>
+        <h3>Note(s) attribuée(s) :</h3>
         {this.state.notes.filter( note => note.critere === this.state.selectedCritere && note.candidat === this.state.selectedCandidat)
           .map((oneNote) => {
               return(
                   <div key={ oneNote.value } value={oneNote.value}>
                   {/* ... make each axe's title a link that goes to the axes details page */}
-                      <Link to={`/notes/${oneNote.value}`}> 
+                      <Link class="link" to={`/notes/${oneNote.value}`}> 
                           { oneNote.display } { oneNote.auteur }
                       </Link>
                       </div>
@@ -211,7 +211,7 @@ class Analyse extends Component {
           <h3>Attribuer une note :</h3>
           <form onSubmit={this.handleFormSubmit}>            
               <label>Note :</label>
-              <input type="text" name="note" value={this.state.note} onChange={ e => this.handleChange(e)}/>
+              <input class="text-input" type="text" name="note" value={this.state.note} onChange={ e => this.handleChange(e)}/>
               {/*
               <select name="note" value={this.state.note} onChange={ e => this.handleChange(e)}>
                 <option value="NA">NA</option>
@@ -222,14 +222,20 @@ class Analyse extends Component {
                 <option value="+">--</option>
               </select>
               */}
+              <br/>
+              <br/>
               <label>Auteur :</label>
-              <input type="text" name="auteur" value={this.state.auteur} onChange={ e => this.handleChange(e)}/>
+              <input class="text-input" type="text" name="auteur" value={this.state.auteur} onChange={ e => this.handleChange(e)}/>
               <input type="hidden" name="critere" value={this.state.selectedCritere} 
             onChange={(e) => this.setState({critere: e.target.value})}/>
               <input type="hidden" name="candidat" value={this.state.selectedCandidat} 
             onChange={(e) => this.setState({candidat: e.target.value})}/>
-              <input type="submit" value="Attribuer" />
+            <br/>
+            <br/>
+              <input class="button" type="submit" value="Attribuer" />
           </form> 
+          <br/>
+          <br/>
         </div>
         {/*
         <div>

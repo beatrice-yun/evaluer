@@ -60,9 +60,10 @@ class CommentaireDetails extends Component {
         <p><b>Positif/négatif :</b> {this.state.boolean}</p>
 
         <div>{this.renderEditForm()} </div> {/* <== !!! */}
-        <button onClick={() => this.deleteCommentaire()}>Supprimer le commentaire</button> {/* <== !!! */}
+        <br/>
+        <button class="button-red" onClick={() => this.deleteCommentaire()}>Supprimer le commentaire</button> {/* <== !!! */}
         <br/><br/><br/><br/><br/>
-        <Link to={'/analyses'}>Revenir à la page d'accueil des évaluations</Link>
+        <Link class="link" to={'/analyses'}>Revenir à la page d'accueil des évaluations</Link>
       </div>
     )
   }
